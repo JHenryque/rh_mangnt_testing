@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function(){
             die('vai para a página inicial do colaborador normal');
         }
 
-    });
+    })->name('home');
 
     // user profile page
     Route::get('/user/profile', [ProfileController::class, 'index'])->name('user.profile');
@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/rh-users/restore/{id}', [RhUserController::class, 'restoreRhColaborator'])->name('colaborators.rh.restore');
     
     Route::get('/rh-users/management/home', [RhManagementController::class, 'home'])->name('rh.management.home');
+    Route::get('/rh-users/management/new-colaborator', [RhManagementController::class, 'newColaborator'])->name('rh.management.new-colaborator');
 
     // admin colaborators list
     Route::get('/colaborators', [ColaboratorsController::class, 'index'])->name('colaborators.all-colaborators');
