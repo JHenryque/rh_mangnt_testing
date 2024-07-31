@@ -17,6 +17,8 @@
 
                 <x-profile-user-change-data />
 
+                <x-profile-user-change-address />
+
             </div>
         </div>
 
