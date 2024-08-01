@@ -6,6 +6,10 @@
 
         <hr>
 
+        <x-info-title-value item-title="Total colaborators" :item-value="$data['total_colaborators']" />
+        <x-info-title-value item-title="Total deleted colaborators" :item-value="$data['total_colaborators_deleted']" />
+        <x-info-title-value item-title="Total salary" :item-value="$data['total_salary']" />
+
     </div>
 
 </x-layout-app>

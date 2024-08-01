@@ -28,6 +28,8 @@ class AdminController extends Controller
                 return $colaborator->detail->salary;
             });
 
+        $data['total_salary'] = number_format($data['total_salary'], 2, ',', '.') . ' $';
+
         // total colaborators by department
         $data['total_colaborators_per_department'] = User::withoutTrashed()
             ->with('department')
