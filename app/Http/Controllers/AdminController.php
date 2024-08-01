@@ -56,6 +56,14 @@ class AdminController extends Controller
                 ];
             });
 
+        // format salary
+        $data['total_salary_by_department'] = $data['total_salary_by_department']->map(function($department){
+            return [
+                'department' => $department['department'],
+                'total' => number_format($department['total'], 2, ',', '.') . ' $'
+            ];
+        });
+
         // display admin home page
         return view('home', compact('data'));
     }
