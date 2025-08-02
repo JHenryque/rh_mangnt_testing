@@ -58,6 +58,25 @@ it('test if an rh user can login with sucess', function () {
     expect($this->get('/rh-users/management/home')->status())->toBe(200);
 });
 
+it('test if an colaborator user can login with sucess', function () {
+
+    // create um admin user
+    addColaboratorUser();
+
+    // login com o Rh
+    $result = $this->post('/login', [
+        'email' => 'eliane@gmail',
+        'password' => 'Aa123456',
+    ]);
+
+    // verifica se o login foi feito com sucesso
+    expect($result->status())->toBe(302);
+    expect($result->assertRedirect('/home'));
+
+    // verifica se o user colaborador nao consegue chegar uma rota do admin
+    expect($this->get('/departments')->status())->not()->toBe(202);
+});
+
 function addAdminUser()
 {
     User::insert([
@@ -83,6 +102,21 @@ function addRhUser()
         'password' => bcrypt('Aa123456'),
         'role' => 'rh',
         'permissions' => '["rh"]',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+}
+
+function addColaboratorUser()
+{
+    User::insert([
+        'department_id' => 3,
+        'name' => 'Eliane',
+        'email' => 'eliane@gmail',
+        'email_verified_at' => now(),
+        'password' => bcrypt('Aa123456'),
+        'role' => 'colaborator',
+        'permissions' => '["colaborator"]',
         'created_at' => now(),
         'updated_at' => now(),
     ]);
