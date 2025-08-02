@@ -28,7 +28,6 @@ it('test if an admin user can login with correctly', function () {
     addAdminUser();
 
     // login com o admin criado
-
     $result = $this->post('/login', [
         'email' => 'admin@rhmangnt.com',
         'password' => 'Aa123456',
