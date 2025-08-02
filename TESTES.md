@@ -2,7 +2,7 @@
 # Lista de testes da aplicação
 # ----------------------------------
 
-> - testar a routa inicial como sendo a pagina de login
+>> - testar a routa inicial como sendo a pagina de login
 - testar a routa de recuperação de senha
 - testar processo de login com sucesso para o perfil de admin
 - testar processo de login com sucesso para o perfil de rh
