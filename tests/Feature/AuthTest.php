@@ -24,18 +24,8 @@ it('display the recover password page page correctly', function () {
 
 it('test if an admin user can login with correctly', function () {
 
-    // criar umd admin
-    User::insert([
-        'department_id' => 1,
-        'name' => 'Administrador',
-        'email' => 'admin@rhmangnt.com',
-        'email_verified_at' => now(),
-        'password' => bcrypt('Aa123456'),
-        'role' => 'admin',
-        'permissions' => '["admin"]',
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
+    // create um admin user
+    addAdminUser();
 
     // login com o admin criado
 
@@ -48,3 +38,19 @@ it('test if an admin user can login with correctly', function () {
     expect($result->status())->toBe(302);
     expect($result->assertRedirect('/home'));
 });
+
+
+function addAdminUser()
+{
+    User::insert([
+        'department_id' => 1,
+        'name' => 'Administrador',
+        'email' => 'admin@rhmangnt.com',
+        'email_verified_at' => now(),
+        'password' => bcrypt('Aa123456'),
+        'role' => 'admin',
+        'permissions' => '["admin"]',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+}
