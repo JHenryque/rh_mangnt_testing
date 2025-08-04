@@ -95,7 +95,7 @@ function addRhUser()
 {
     User::insert([
         'department_id' => 2,
-        'name' => 'Rildo',
+        'name' => '',
         'email' => 'rildo@gmail.com',
         'email_verified_at' => now(),
         'password' => bcrypt('Aa123456'),
@@ -110,8 +110,8 @@ function addColaboratorUser()
 {
     User::insert([
         'department_id' => 3,
-        'name' => 'Eliane',
-        'email' => 'eliane@gmail',
+        'name' => 'colaborator 1',
+        'email' => 'colaborator@gmail.com',
         'email_verified_at' => now(),
         'password' => bcrypt('Aa123456'),
         'role' => 'colaborator',
