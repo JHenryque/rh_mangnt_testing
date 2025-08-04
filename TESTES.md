@@ -11,7 +11,7 @@
 > - testar a inserção de um novo user rh com o perfil do admin
 > - testar a inserção de um novo colaborador com o perfil de rh
 
-- testar se um admin, apos login com sucesso, consegue ver a pagina de colaborador rh
-- testar se sem usuario logado, é possivel aceder á pagina de home
-- testar se com usuario logado, é possivel aceder á pagina de login
-- testar se estando locado, é possivel aceder á pagina de recuperação de senha
+> - testar se um admin, apos login com sucesso, consegue ver a pagina de colaborador rh
+> - testar se sem usuario logado, é possivel aceder á pagina de home
+> - testar se com usuario logado, é possivel aceder á pagina de login
+> - testar se estando logado, é possivel aceder á pagina de recuperação de senha
