@@ -11,3 +11,11 @@ it ('test is an adimn user can see the RH users oage', function () {
     // verificar se acede com sucessi a pagina de RH users
     expect($this->get('/rh-users')->status())->toBe(200);
 });
+
+it('test if is not possiblr to acces the home page homo page withiut logged user', function () {
+    // verifica se e possivel aceder home page
+    expect($this->get('/home')->status())->toBe(302);
+
+    // ou
+    expect($this->ge('/home')->status())->not()->toBe(200);
+});
