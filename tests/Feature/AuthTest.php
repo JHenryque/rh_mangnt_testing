@@ -2,35 +2,37 @@
 
 use App\Models\User;
 
-it('display the login page when not logged in', function () {
-    // verifica, no contexto do Fortify, se ao entrar na pagina inicial, vai ser
-    // redirecionado para a pagina de login
+it('display the login page when not logged in', function(){
+
+    // verifica, no contexto do Fortify, se ao entrar na página inicial, vai ser
+    // redirecionado para a página de login
     $result = $this->get('/')->assertRedirect('/login');
 
-    // verifica se o reulstado é 302
+    // verificar se o resultado é 302
     expect($result->status())->toBe(302);
 
-    // verifica se a rota de login e acessivel com status 200
+    // verifica se a rota de login é acessível com status 200
     expect($this->get('/login')->status())->toBe(200);
 
-    // verifica se a pagina de login contem o texto "esqueceu a senha"
+    // verifica se a página de login contém o texto "Esqueceu a sua senha?"
     expect($this->get('/login')->content())->toContain("Esqueceu a sua senha?");
+
 });
 
-it('display the recover password page page correctly', function () {
-   expect($this->get('/forgot-password')->status())->toBe(200);
-   expect($this->get('/forgot-password')->content())->toContain("Já sei a minha senha?");
+it('display the recover password page correctly', function(){
+    expect($this->get('/forgot-password')->status())->toBe(200);
+    expect($this->get('/forgot-password')->content())->toContain("Já sei a minha senha?");
 });
 
-it('test if an admin user can login with correctly', function () {
+it('test if an admin user can login with success', function(){
 
-    // create um admin user
+    // criar um admin
     addAdminUser();
 
     // login com o admin criado
     $result = $this->post('/login', [
         'email' => 'admin@rhmangnt.com',
-        'password' => 'Aa123456',
+        'password' => 'Aa123456'
     ]);
 
     // verifica se o login foi feito com sucesso
@@ -38,46 +40,46 @@ it('test if an admin user can login with correctly', function () {
     expect($result->assertRedirect('/home'));
 });
 
-it('test if an rh user can login with sucess', function () {
+it('test if an rh user can login with success', function(){
 
-    // create um admin user
+    // criar o usuário rh
     addRhUser();
 
-    // login com o Rh
+    // login com o rh
     $result = $this->post('/login', [
-        'email' => 'rildo@gmail.com',
-        'password' => 'Aa123456',
+        'email' => 'rh1@rhmangnt.com',
+        'password' => 'Aa123456'
     ]);
 
-    // verifica se o login foi feito com sucesso
+    // verifica se o user rh fez login com sucesso
     expect($result->status())->toBe(302);
     expect($result->assertRedirect('/home'));
 
-    // verofoca se o user th consegue acessa a pagina exclusiva
+    // verifica se o user rh consegue acesso a página exclusiva
     expect($this->get('/rh-users/management/home')->status())->toBe(200);
 });
 
-it('test if an colaborator user can login with sucess', function () {
+it('test if an colaborator user can login with success', function(){
 
-    // create um admin user
+    // criar o usuário colaborador
     addColaboratorUser();
 
-    // login com o Rh
+    // login com o colaborador
     $result = $this->post('/login', [
-        'email' => 'eliane@gmail',
-        'password' => 'Aa123456',
+        'email' => 'worker1@rhmangnt.com',
+        'password' => 'Aa123456'
     ]);
 
-    // verifica se o login foi feito com sucesso
+    // verifica se o user rh fez login com sucesso
     expect($result->status())->toBe(302);
     expect($result->assertRedirect('/home'));
 
-    // verifica se o user colaborador nao consegue chegar uma rota do admin
-    expect($this->get('/departments')->status())->not()->toBe(202);
+    // verifica se o colaborador NÃO consegue chegar a uma rota exclusiva do admin
+    expect($this->get('/departments')->status())->not()->toBe(200);
 });
 
-function addAdminUser()
-{
+function addAdminUser(){
+    // create admin user
     User::insert([
         'department_id' => 1,
         'name' => 'Administrador',
@@ -91,12 +93,12 @@ function addAdminUser()
     ]);
 }
 
-function addRhUser()
-{
+function addRhUser(){
+    // create rh user
     User::insert([
         'department_id' => 2,
-        'name' => '',
-        'email' => 'rildo@gmail.com',
+        'name' => 'Colaborador de RH',
+        'email' => 'rh1@rhmangnt.com',
         'email_verified_at' => now(),
         'password' => bcrypt('Aa123456'),
         'role' => 'rh',
@@ -106,12 +108,12 @@ function addRhUser()
     ]);
 }
 
-function addColaboratorUser()
-{
+function addColaboratorUser(){
+    // create rh user
     User::insert([
         'department_id' => 3,
-        'name' => 'colaborator 1',
-        'email' => 'colaborator@gmail.com',
+        'name' => 'Colaborador de Armazém',
+        'email' => 'worker1@rhmangnt.com',
         'email_verified_at' => now(),
         'password' => bcrypt('Aa123456'),
         'role' => 'colaborator',
