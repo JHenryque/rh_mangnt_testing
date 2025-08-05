@@ -28,3 +28,12 @@ it('tests if the phrase is created correctly', function(){
 
     expect($result)->toBe('O salário do José Henrique é 1000$');
 });
+
+it('tests if the salary with bonus is calculated correctly', function(){
+    $salary = 1000;
+    $bonus = 25;
+
+    $result = GeneralServices::getSalaryWithBonus($salary, $bonus);
+
+    expect($result)->toBe(1025);
+});
