@@ -20,3 +20,11 @@ it('tests if the salary is not grather than a specific amount', function(){
     expect($result)->toBeFalse();
 });
 
+it('tests if the phrase is created correctly', function(){
+    $name = "José Henrique";
+    $salary = 1000;
+
+    $result = GeneralServices::createPhraseWithNameAndSalary($name, $salary);
+
+    expect($result)->toBe('O salário do José Henrique é 1000$');
+});
