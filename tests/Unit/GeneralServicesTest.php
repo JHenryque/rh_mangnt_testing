@@ -21,12 +21,12 @@ it('tests if the salary is not grather than a specific amount', function(){
 });
 
 it('tests if the phrase is created correctly', function(){
-    $name = "José Henrique";
+    $name = "João Ribeiro";
     $salary = 1000;
 
     $result = GeneralServices::createPhraseWithNameAndSalary($name, $salary);
 
-    expect($result)->toBe('O salário do José Henrique é 1000$');
+    expect($result)->toBe('O salário do(a) João Ribeiro é 1000$');
 });
 
 it('tests if the salary with bonus is calculated correctly', function(){
@@ -36,4 +36,15 @@ it('tests if the salary with bonus is calculated correctly', function(){
     $result = GeneralServices::getSalaryWithBonus($salary, $bonus);
 
     expect($result)->toBe(1025);
+});
+
+it('tests if the fake json data is created correctly', function(){
+
+    $results = GeneralServices::fakeDataInJson();
+
+    $clients = json_decode($results, true);
+
+    expect(count($clients))->toBeGreaterThanOrEqual(1);
+    expect($clients[0])->toHaveKeys(['name','email','phone','address']);
+
 });
